@@ -1,35 +1,34 @@
 # Deep RL Quadcopter Controller
 
-*Teach a Quadcopter How to Fly!*
+The agent implemented follows the approach in [1] and consists of a Policy-Based Actor-Critic algorithm called Deep Deterministic Policy Dradients (DDPG). In actor-critics two oposite components denominated as actor and critic improve mutually from the other's output, the former learns how to perform actions in a given environment trying to maximize reward based on the evaluation made by the critic and the later uses predictions made by the actor and rewards of such actions in order to enhance evaluation in further iterations.
 
-In this project, you will design an agent to fly a quadcopter, and then train it using a reinforcement learning algorithm of your choice! 
+In DDPG the components previously mentioned are neuronal networks. The actor's first and final layers has as many nodes as parameters describing the state and action spaces respectivelly, and three hidden full connected layers with Relu activations. The critic maps state-action pairs to a Q-value matrix, it has two input layers with as many nodes as parameters describing the state an action spaces respectivelly, wich are preceded by two full connected Relu activated layers and added up before connecting with a final full conected for the Q-value.
+
+  [1] Lillicrap, Timothy P., et al. "Continuous control with deep reinforcement learning." arXiv preprint arXiv:1509.02971 (2015).
 
 ## Project Instructions
 
 1. Clone the repository and navigate to the downloaded folder.
 
 ```
-git clone https://github.com/udacity/RL-Quadcopter-2.git
-cd RL-Quadcopter-2
+git clone https://github.com/roj4s/quadcop_rl.git
+cd quadcop_rl
 ```
 
-2. Create and activate a new environment.
+2. Build docker image.
 
 ```
-conda create -n quadcop python=3.6 matplotlib numpy pandas
-source activate quadcop
+docker build -t roj4s/quadcop .
 ```
 
-3. Create an [IPython kernel](http://ipython.readthedocs.io/en/stable/install/kernel_install.html) for the `quadcop` environment. 
+3. Run docker image.
 ```
-python -m ipykernel install --user --name quadcop --display-name "quadcop"
+docker run --gpus all -p 8080:8080 roj4s/quadcop
+
 ```
 
-4. Open the notebook.
+4. Open the notebook in any browser at http://localhost:8080.
 ```
 jupyter notebook Quadcopter_Project.ipynb
+
 ```
-
-5. Before running code, change the kernel to match the `quadcop` environment by using the drop-down menu (**Kernel > Change kernel > quadcop**). Then, follow the instructions in the notebook.
-
-6. You will likely need to install more pip packages to complete this project.  Please curate the list of packages needed to run your project in the `requirements.txt` file in the repository.
