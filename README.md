@@ -28,7 +28,3 @@ docker run --gpus all -p 8080:8080 roj4s/quadcop
 ```
 
 4. Open the notebook in any browser at http://localhost:8080.
-```
-jupyter notebook Quadcopter_Project.ipynb
-
-```
